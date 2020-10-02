@@ -1,6 +1,8 @@
 package com.company;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CountSquare {
     private final int[][] oneSquare = {
@@ -186,29 +188,27 @@ public class CountSquare {
     }
 
     int countNumberOfSquares(int[][] coordinates) {
+        Map<String, String> coordinatesInMap = new HashMap<>();
+
+        for (int[] coordinate : coordinates) {
+            coordinatesInMap.put((coordinate[0] + " " + coordinate[1]), null);
+        }
+
         int count = 0;
         int[] startCoordinate = findSmallestCoordinates(coordinates);
         int[] endCoordinate = findBiggestCoordinates(coordinates);
         int endLoop = Math.max(endCoordinate[0] - startCoordinate[0] + 1, endCoordinate[1] - startCoordinate[1] + 1);
 
         for (int[] coordinate : coordinates) {
-
             // search for number of square starting from a coordinate
             for (int j = 1; j < endLoop; j++) {
-                int[] testCoordinate1 = {coordinate[0] + j, coordinate[1]};
-                int[] testCoordinate2 = {coordinate[0], coordinate[1] + j};
-                int[] testCoordinate3 = {coordinate[0] + j, coordinate[1] + j};
-
-                if (isInArray(coordinates, testCoordinate1)
-                        && isInArray(coordinates, testCoordinate2)
-                        && isInArray(coordinates, testCoordinate3))
-                {
+                if (coordinatesInMap.containsKey((coordinate[0] + j) + " " + coordinate[1])
+                        && coordinatesInMap.containsKey(coordinate[0] + " " + (coordinate[1] + j))
+                        && coordinatesInMap.containsKey((coordinate[0] + j) + " " + (coordinate[1] + j))) {
                     count++;
                 }
             }
-
         }
-
 
         return count;
     }
@@ -243,14 +243,5 @@ public class CountSquare {
         }
 
         return new int[]{maxX, maxY};
-    }
-
-    boolean isInArray(int[][] coordinates, int[] coordinateToSearch) {
-        for (int[] coordinate: coordinates) {
-            if (Arrays.equals(coordinate, coordinateToSearch)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
