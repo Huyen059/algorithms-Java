@@ -1,11 +1,22 @@
 package com.company;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class Main {
 
+
+
     public static void main(String[] args) {
+        File basedir = new File("basedir");
+        Test test = new Test();
+        test.findDeepestFile(basedir);
+        System.out.println(test.name);
     }
+
 
 
     public static String findDirWithMaxNumberOfFiles(String path) {
@@ -77,5 +88,29 @@ public class Main {
         }
 
         return false;
+    }
+}
+
+class Test {
+    int level = 0;
+    int deepestLevel = 0;
+    String name = "";
+
+
+    public void findDeepestFile(File file) {
+        File[] files = file.listFiles();
+        if (files == null) {
+            if (level > deepestLevel) {
+                deepestLevel = level;
+                name = file.getName();
+                level--;
+            }
+        } else {
+            level++;
+            for (var subFile: files) {
+                findDeepestFile(subFile);
+            }
+            level--;
+        }
     }
 }
