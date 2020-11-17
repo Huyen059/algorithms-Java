@@ -1,5 +1,13 @@
 package com.company;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.Charset;
+import java.nio.file.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -129,10 +137,90 @@ public class Learn {
 //        friends.forEach(friend -> greeting.apply("Hi").accept(friend));
 //        partners.forEach(partner -> greeting.apply("Hello").accept(partner));
 
+//        List<String> friends = List.of("An", "Binh", "Cong", "Dung");
+//        List<String> list = Collections.unmodifiableList(friends);
+//        Set<String> distinctNames = new HashSet<>(friends);
+//        List<String> list1 = new ArrayList<>(friends);
+//        String[] array = friends.toArray(new String[0]);
+
+//        List<String> friends = List.of("An", "Binh", "Cong", "Dung");
+//        for (var friend : friends)
+//            System.out.println(friend);
+
+        // WORKING WITH ZIP FILE
+//        try (FileSystem zipFs = openZip(Paths.get("myData.zip"))) {
+//            // Copy a file to zip file
+//            Files.copy(Paths.get("test.txt"), zipFs.getPath("copyOfTest.txt"), StandardCopyOption.REPLACE_EXISTING);
+//            // Write to a file in zip file
+//            var fileContent = Files.readAllLines(Paths.get("test.txt"));
+//            Files.write(zipFs.getPath("file1.txt"), fileContent,
+//                    Charset.defaultCharset(), StandardOpenOption.CREATE);
+//        } catch (IOException | URISyntaxException e) {
+//            e.printStackTrace();
+//        }
+
+        // STRINGJOINER
+        // No open/close strings
+//        StringJoiner str1 = new StringJoiner(", ");
+//        str1.add("An").add("Binh");
+//        String rs1 = str1.toString();  // An, Binh
+//        // With open/close strings
+//        StringJoiner str2 = new StringJoiner(", ", "(", ")");
+//        str1.add("An").add("Binh");
+//        String rs2 = str2.toString();  // (An, Binh)
+//        // No value
+//        StringJoiner str3 = new StringJoiner(", ");
+//        String rs3 = str3.toString(); // empty string
+//
+//        StringJoiner str4 = new StringJoiner(", ", "(", ")");
+//        String rs4 = str4.toString(); // give us a string: ()
+//
+//        StringJoiner str5 = new StringJoiner(", ");
+//        str5.setEmptyValue("EMPTY");
+//        String rs5 = str5.toString(); // EMPTY
+//
+//        StringJoiner str6 = new StringJoiner(", ", "(", ")");
+//        str6.setEmptyValue("EMPTY");
+//        String rs6 = str6.toString(); // EMPTY (without open/close strings)
+//
+//        StringJoiner str7 = new StringJoiner(", ");
+//        str7.setEmptyValue("EMPTY");
+//        str7.add("");
+//        String rs7 = str7.toString(); // return empty string
+//
+//        StringJoiner str8 = new StringJoiner(", ", "(", ")");
+//        str8.setEmptyValue("EMPTY");
+//        str8.add("");
+//        String rs8 = str8.toString(); // return a string: ()
+
+//        Properties properties = new Properties();
+//        properties.setProperty("name", "ABC DEF");
+//        properties.setProperty("job", "TEST");
+//
+//        try (Writer writer = Files.newBufferedWriter(Paths.get("test.properties"))) {
+//            properties.store(writer, "property of a person to be saved");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Properties props = new Properties();
+//        try(Reader reader = Files.newBufferedReader(Paths.get("test.properties"))) {
+//            props.load(reader);
+//            System.out.println(props.get("name"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
         System.out.println("");
     }
 
-
+//    public static FileSystem openZip(Path zipPath) throws IOException, URISyntaxException {
+//        Map<String, String> providerProps = new HashMap<>();
+//        providerProps.put("create", "true");
+//
+//        URI zipURI = new URI("jar:file", zipPath.toUri().getPath(), null);
+//        return FileSystems.newFileSystem(zipURI, providerProps);
+//    }
 }
 
 class Product
