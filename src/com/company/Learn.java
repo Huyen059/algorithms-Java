@@ -211,7 +211,14 @@ public class Learn {
 //            e.printStackTrace();
 //        }
 
-        TreeSet<MyClass> treeSet = new TreeSet<>();
+//        TreeSet<MyClass> treeSet = new TreeSet<>();
+//        treeSet.add(new MyClass("2222", "ghi"));
+//        treeSet.add(new MyClass("3333", "abc"));
+//        treeSet.add(new MyClass("1111", "def"));
+//
+//        treeSet.forEach(el -> System.out.println(el));
+
+        TreeSet<MyClass> treeSet = new TreeSet<>(new MyComparator());
         treeSet.add(new MyClass("2222", "ghi"));
         treeSet.add(new MyClass("3333", "abc"));
         treeSet.add(new MyClass("1111", "def"));
@@ -312,5 +319,20 @@ class MyClass implements Comparable<MyClass>{
                 "label='" + label + '\'' +
                 ", value='" + value + '\'' +
                 '}';
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public String getValue() {
+        return value;
+    }
+}
+
+class MyComparator implements Comparator<MyClass> {
+    @Override
+    public int compare(MyClass x, MyClass y) {
+        return x.getLabel().compareToIgnoreCase(y.getLabel());
     }
 }
