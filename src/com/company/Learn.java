@@ -211,6 +211,13 @@ public class Learn {
 //            e.printStackTrace();
 //        }
 
+        TreeSet<MyClass> treeSet = new TreeSet<>();
+        treeSet.add(new MyClass("2222", "ghi"));
+        treeSet.add(new MyClass("3333", "abc"));
+        treeSet.add(new MyClass("1111", "def"));
+
+        treeSet.forEach(el -> System.out.println(el));
+
         System.out.println("");
     }
 
@@ -274,5 +281,36 @@ class Product
     public int hashCode()
     {
         return Objects.hash(id, name, weight);
+    }
+}
+
+class MyClass implements Comparable<MyClass>{
+    String label;
+    String value;
+
+    public MyClass(String label, String value) {
+        this.label = label;
+        this.value = value;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        MyClass myClass = (MyClass) obj;
+        // use value field to check equality
+        return value.equalsIgnoreCase(myClass.value);
+    }
+
+    @Override
+    public int compareTo(MyClass myClass) {
+        // use the same value field to compare, since it's used in equals
+        return value.compareToIgnoreCase(myClass.value);
+    }
+
+    @Override
+    public String toString() {
+        return "MyClass{" +
+                "label='" + label + '\'' +
+                ", value='" + value + '\'' +
+                '}';
     }
 }
