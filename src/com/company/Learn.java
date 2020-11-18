@@ -12,6 +12,8 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.*;
+import java.util.logging.*;
+import java.util.logging.Formatter;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -218,12 +220,23 @@ public class Learn {
 //
 //        treeSet.forEach(el -> System.out.println(el));
 
-        TreeSet<MyClass> treeSet = new TreeSet<>(new MyComparator());
-        treeSet.add(new MyClass("2222", "ghi"));
-        treeSet.add(new MyClass("3333", "abc"));
-        treeSet.add(new MyClass("1111", "def"));
+//        TreeSet<MyClass> treeSet = new TreeSet<>(new MyComparator());
+//        treeSet.add(new MyClass("2222", "ghi"));
+//        treeSet.add(new MyClass("3333", "abc"));
+//        treeSet.add(new MyClass("1111", "def"));
+//
+//        treeSet.forEach(el -> System.out.println(el));
 
-        treeSet.forEach(el -> System.out.println(el));
+//        Logger logger = LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME);
+//        logger.log(Level.INFO, "Info message");
+//        logger.log(Level.INFO, "Info message 2");
+
+        Logger logger = Logger.getLogger("com.example");
+        Handler handler = new ConsoleHandler();
+        logger.addHandler(handler);
+        Formatter formatter = new SimpleFormatter();
+        handler.setFormatter(formatter);
+        logger.info("test");
 
         System.out.println("");
     }
